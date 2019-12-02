@@ -54,6 +54,7 @@ import java.util.Map;
 import java.util.concurrent.Callable;
 
 /**
+ * Task执行的入口
  * This class is the executable entry point for running a TaskExecutor in a YARN container.
  */
 public class YarnTaskExecutorRunner {

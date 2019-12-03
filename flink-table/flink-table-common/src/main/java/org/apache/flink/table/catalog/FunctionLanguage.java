@@ -16,10 +16,19 @@
  * limitations under the License.
  */
 
-package org.apache.flink.testutils.junit.category;
+package org.apache.flink.table.catalog;
+
+import org.apache.flink.annotation.PublicEvolving;
 
 /**
- * Category marker interface to run tests with SchedulerNG.
+ * Categorizes the language semantics of a {@link CatalogFunction}.
  */
-public interface AlsoRunWithSchedulerNG {
+@PublicEvolving
+public enum FunctionLanguage {
+
+	JAVA,
+
+	SCALA,
+
+	PYTHON
 }

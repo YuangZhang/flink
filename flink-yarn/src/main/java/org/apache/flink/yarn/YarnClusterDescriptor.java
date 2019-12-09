@@ -710,7 +710,9 @@ public class YarnClusterDescriptor implements ClusterDescriptor<ApplicationId> {
 		// initialize file system
 		// Copy the application master jar to the filesystem
 		// Create a local resource to point to the destination jar path
+		// DFS[DFSClient[clientName=DFSClient_NONMAPREDUCE_939730005_1, ugi=zhangyuang@FUXI-LUOGE-79 (auth:KERBEROS)]]
 		final FileSystem fs = FileSystem.get(yarnConfiguration);
+		// 获取父目录 /user/zhangyuang
 		final Path homeDir = fs.getHomeDirectory();
 
 		// hard coded check for the GoogleHDFS client because its not overriding the getScheme() method.
@@ -780,10 +782,13 @@ public class YarnClusterDescriptor implements ClusterDescriptor<ApplicationId> {
 		// local resource map for Yarn
 		final Map<String, LocalResource> localResources = new HashMap<>(2 + systemShipFiles.size() + userJarFiles.size());
 		// list of remote paths (after upload)
+		// 在hdfs中的路径
 		final List<Path> paths = new ArrayList<>(2 + systemShipFiles.size() + userJarFiles.size());
 		// ship list that enables reuse of resources for task manager containers
 		StringBuilder envShipFileList = new StringBuilder();
 
+		// 上传依赖文件，并将文件路径添加到classpath中
+		// shipfile、 插件、userjar
 		// upload and register ship files, these files will be added to classpath.
 		List<String> systemClassPaths = uploadAndRegisterFiles(
 			systemShipFiles,
